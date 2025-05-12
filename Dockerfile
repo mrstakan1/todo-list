@@ -35,11 +35,10 @@ RUN install -d -o postgres -g postgres "$PGDATA" && \
 # копируем артефакты
 COPY --from=frontend /app/dist      /usr/share/nginx/html
 COPY --from=backend  /api           /usr/local/bin/api
-# собственный конфиг nginx (fallback SPA + proxy /api/*)
-COPY docker/nginx.conf              /etc/nginx/http.d/default.conf
+
 # старт-скрипт
 COPY docker/start.sh                /start.sh
 RUN chmod +x /start.sh
 
 EXPOSE 80
-ENTRYPOINT ["/sbin/tini","--","/start.sh"]
+ENTRYPOINT ["/bin/sh", "/start.sh"]
