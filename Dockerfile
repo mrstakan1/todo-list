@@ -27,6 +27,7 @@ RUN apk add --no-cache nginx postgresql16 postgresql16-client tini
 # инициализация БД
 RUN install -d -o postgres -g postgres "$PGDATA" && \
     su postgres -c "initdb -D $PGDATA" && \
+    install -d -o postgres -g postgres /run/postgresql && \
     su postgres -c "pg_ctl -D $PGDATA -o '-c listen_addresses=localhost' -w start" && \
     su postgres -c "psql -c \"CREATE USER ${DB_USER} WITH PASSWORD '${DB_PASS}';\"" && \
     su postgres -c "createdb -O ${DB_USER} ${DB_NAME}" && \
