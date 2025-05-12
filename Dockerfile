@@ -6,7 +6,7 @@ RUN npm ci
 COPY frontend .
 RUN npm run build                       # → /app/dist
 ######################  build backend   ######################
-FROM golang:1.22-alpine AS backend
+FROM golang:1.24.2-alpine AS backend
 WORKDIR /app
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
