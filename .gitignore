@@ -1,0 +1,48 @@
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.swo
+*.tmp
+
+.git/
+.gitattributes
+.gitmodules
+
+/backend/bin/
+/backend/server      # бинарник, если собираем локально
+/backend/coverage.*  # отчёты go test -cover
+/backend/*.test
+**/*.out
+
+/frontend/node_modules/
+/frontend/.npm/
+/frontend/.yarn/
+/frontend/.pnp
+/frontend/dist/             # Vite-сборка
+/frontend/.cache/
+/frontend/.vite/
+
+# lock-файлы можно коммитить; если не нужно — раскомментируйте
+# /frontend/package-lock.json
+# /frontend/yarn.lock
+
+/frontend/.tailwindcss*
+
+.idea/
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+/dbdata/               # volume, если монтируете в репозиторий
+*.tar
+**/*~docker-compose*.yaml.swp
+
+ehthumbs.db
+Icon?
+desktop.ini
+
+.env
+.env.*
+*.local
