@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"encoding/csv"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -44,5 +46,30 @@ func TodoRoutes(r *gin.Engine, db *gorm.DB) {
 	g.DELETE("/:id", func(c *gin.Context) {
 		db.Where("id = ? AND user_id = ?", c.Param("id"), c.GetUint("uid")).Delete(&model.Todo{})
 		c.Status(http.StatusNoContent)
+	})
+
+	g.GET("/export", func(c *gin.Context) {
+		fmt := c.DefaultQuery("fmt", "json")
+		var list []model.Todo
+		db.Where("user_id = ?", c.GetUint("uid")).Find(&list)
+
+		switch fmt {
+		case "csv":
+			c.Header("Content-Disposition", "attachment; filename=todos.csv")
+			c.Header("Content-Type", "text/csv; charset=utf-8")
+			w := csv.NewWriter(c.Writer)
+			_ = w.Write([]string{"id", "title", "completed"})
+			for _, t := range list {
+				_ = w.Write([]string{
+					strconv.FormatUint(uint64(t.ID), 10),
+					t.Title,
+					strconv.FormatBool(t.Completed),
+				})
+			}
+			w.Flush()
+		default: // json
+			c.Header("Content-Disposition", "attachment; filename=todos.json")
+			c.JSON(http.StatusOK, list)
+		}
 	})
 }
