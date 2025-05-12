@@ -24,10 +24,6 @@ COPY --from=frontend /app/dist /usr/share/nginx/html
 # копируем Go-бинарь
 COPY --from=backend /api /usr/local/bin/api
 
-# конфиг nginx (по умолчанию подходит, только root уже указан)
-RUN sed -i 's/80 default_server;/80;/' /etc/nginx/conf.d/default.conf \
- && sed -i 's/index  index.html index.htm;/index  index.html;/' /etc/nginx/conf.d/default.conf
-
 # стартовый скрипт
 COPY docker/start.sh /start.sh
 RUN chmod +x /start.sh
