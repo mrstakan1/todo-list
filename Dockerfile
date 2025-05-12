@@ -42,4 +42,4 @@ COPY docker/start.sh                /start.sh
 RUN chmod +x /start.sh
 
 EXPOSE 80
-ENTRYPOINT ["/bin/sh", "/start.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/start.sh"]
