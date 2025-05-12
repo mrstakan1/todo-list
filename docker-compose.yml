@@ -17,5 +17,3 @@ services:
   web:
     build: ./frontend
     ports: [ "5173:80" ]
-volumes:
-  dbdata:
