@@ -9,7 +9,13 @@ export default function TodoItem({ todo, reload }) {
                 <input type="checkbox" checked={todo.completed} onChange={toggle}/>
                 <span className={todo.completed ? 'line-through' : ''}>{todo.title}</span>
             </label>
-            <button onClick={del}>✕</button>
+            <button
+                onClick={del}
+                className="text-red-600 hover:text-red-800 text-xl leading-none"
+                title="Удалить"
+            >
+                &times;
+            </button>
         </li>
     )
 }
