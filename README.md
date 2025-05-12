@@ -76,7 +76,3 @@ docker compose down
 cd backend
 go test ./internal/service -run=^$ -fuzz=. -fuzztime=60s
 ```
-
-## Структура проекта
-
-```
