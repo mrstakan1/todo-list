@@ -33,5 +33,5 @@ func main() {
 	handler.AuthRoutes(r, db)
 	r.Use(middleware.Auth())
 	handler.TodoRoutes(r, db)
-	r.Run("77.221.135.36:8080")
+	r.Run("127.0.0.1:8080")
 }
