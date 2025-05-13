@@ -24,7 +24,7 @@ func main() {
 
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:5173"},
+		AllowOrigins: []string{"https://77.221.135.36:5173"},
 		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders: []string{"Authorization", "Content-Type"},
 	}))
@@ -33,5 +33,5 @@ func main() {
 	handler.AuthRoutes(r, db)
 	r.Use(middleware.Auth())
 	handler.TodoRoutes(r, db)
-	r.Run(":8080")
+	r.Run("77.221.135.36:8080")
 }
